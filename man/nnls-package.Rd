@@ -4,8 +4,13 @@
 \title{The Lawson-Hanson NNLS algorithm for non-negative least squares}
 \description{
   An R interface to the NNLS algorithm for non-negative least squares
-  that solves the least squares problem 
-  \eqn{A x = b} with the constraint \eqn{x >= 0}. 
+  that solves the least squares problem
+  \eqn{Ax = b} with the constraint \eqn{x \geq 0} where
+  where
+  \eqn{x \in R^n, b \in R^m}  and \eqn{A} is an
+  \eqn{m \times n} matrix. 
+  Also allows the combination of non-negative and non-positive
+  constraints on \eqn{x}. 
 }
 
 \author{Katharine M. Mullen <kate@nat.vu.nl> }
@@ -19,7 +24,8 @@ in Applied Mathematics. SIAM, Philadelphia.
 }
 
 \keyword{ package }
-\seealso{\link{nnls}, 
-  the method \code{"L-BFGS-B"} for \link{optim}
+\seealso{ \link{nnls},\link{nnnpls},
+  the method \code{"L-BFGS-B"} for \link{optim},
+   \link[pkg]{quadprog}, \link[pkg]{bvls}
 } 
 
