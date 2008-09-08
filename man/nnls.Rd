@@ -1,11 +1,12 @@
 \name{nnls}
 \alias{nnls}
-\title{The Lawson-Hanson NNLS algorithm for non-negative least squares}
+\title{The Lawson-Hanson NNLS implemention of non-negative least squares}
 \description{
   An R interface to the Lawson-Hanson
-  NNLS algorithm for non-negative least squares
+  NNLS implementation of an algorithm
+  for non-negative linear least squares 
   that solves 
-  \eqn{A x = b} with the constraint \eqn{x \geq 0} under least squares
+  \eqn{A x = b} with the constraint \eqn{x \ge 0} under least squares
   criteria,  where
   \eqn{x \in R^n, b \in R^m}  and \eqn{A} is an \eqn{m \times n} matrix. 
 }
@@ -33,7 +34,13 @@ nnls(A, b)
   \item{residuals}{the residuals, that is response minus fitted values.}
   \item{fitted}{the fitted values.}
   \item{mode}{a character vector containing a message regarding why
-  termination occured.}
+    termination occured.}
+  \item{passive}{vector of the indices of \code{x} that are not bound
+    at zero. }
+  \item{bound}{vector of the indices of \code{x} that are bound
+    at zero.}
+  \item{nsetp}{the number of elements of \code{x} that are not bound
+  at zero. }
 }
 \references{
 Lawson CL, Hanson RJ (1974). Solving Least Squares Problems. Prentice
@@ -45,10 +52,11 @@ in Applied Mathematics. SIAM, Philadelphia.
 \author{Katharine M. Mullen <kate@nat.vu.nl> }
 
 \source{
-  This is an R interface to the unmodified Fortran77 code distributed
+  This is an R interface to the Fortran77 code distributed
   with the book referenced below by Lawson CL, Hanson RJ (1995),
-  obtained from Netlib (file \file{lawson-hanson/all}).
-  
+  obtained from Netlib (file \file{lawson-hanson/all}), 
+  with a trivial modification to return the variable
+  NSETP.
 }
 \seealso{\link{nnnpls}, the method \code{"L-BFGS-B"} for \link{optim},
   \link[pkg]{quadprog}, \link[pkg]{bvls}
@@ -78,7 +86,7 @@ set.seed(3300)
 
 ## simulated data is the product of A and X with some
 ## spherical Gaussian noise added 
-matdat <- A \%*\% t(X) + .01 * rnorm(nrow(A) * nrow(X))
+matdat <- A \%*\% t(X) + .005 * rnorm(nrow(A) * nrow(X))
 
 ## estimate the rows of X using NNLS criteria 
 nnls_sol <- function(matdat, A) {
@@ -88,6 +96,9 @@ nnls_sol <- function(matdat, A) {
   X
 }
 X_nnls <- nnls_sol(matdat,A) 
+
+matplot(X_nnls,type="b",pch=20)
+abline(0,0, col=grey(.6))
 
 \dontrun{
 ## can solve the same problem with L-BFGS-B algorithm

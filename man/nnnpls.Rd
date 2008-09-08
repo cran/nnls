@@ -1,13 +1,14 @@
 \name{nnnpls}
 \alias{nnnpls}
-\title{An algorithm for least squares with non-negative and non-positive
+\title{An implementation of least squares with non-negative and non-positive
   constraints}
 \description{
-  An algorithm for least squares with non-negative and non-positive
+  An implementation of an algorithm for linear least squares problems
+  with non-negative and non-positive
   constraints based on the Lawson-Hanson
   NNLS algorithm.   Solves 
-  \eqn{A x = b} with the constraint \eqn{x_i \geq 0}
-  if \eqn{con_i \geq 0} and \eqn{x_i \leq 0} otherwise
+  \eqn{A x = b} with the constraint \eqn{x_i \ge 0}
+  if \eqn{con_i \ge 0} and \eqn{x_i \le 0} otherwise
   under least squares
   criteria,  where
   \eqn{x, con \in R^n, b \in R^m}, and \eqn{A} is an \eqn{m \times n} matrix.  
@@ -40,6 +41,12 @@ nnnpls(A, b, con)
   \item{fitted}{the fitted values.}
   \item{mode}{a character vector containing a message regarding why
     termination occured.}
+  \item{passive}{vector of the indices of \code{x} that are not bound
+    at zero. }
+  \item{bound}{vector of the indices of \code{x} that are bound
+    at zero.}
+  \item{nsetp}{the number of elements of \code{x} that are not bound
+  at zero. }
 }
 \references{
 Lawson CL, Hanson RJ (1974). Solving Least Squares Problems. Prentice
@@ -55,7 +62,8 @@ in Applied Mathematics. SIAM, Philadelphia.
   with the book referenced below by Lawson CL, Hanson RJ (1995),
   obtained from Netlib (file \file{lawson-hanson/all}), with some
   trivial modifications to allow for the combination of constraints to
-  non-negative and non-positive values.  
+  non-negative and non-positive values, and to return the variable
+  NSETP.
 }
 \seealso{
 \link{nnls}, the method \code{"L-BFGS-B"} for \link{optim},

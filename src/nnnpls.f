@@ -52,7 +52,7 @@ C                   EITHER M .LE. 0 OR N .LE. 0.
 C             3    ITERATION COUNT EXCEEDED.  MORE THAN 3*N ITERATIONS. 
 C   
 C     ------------------------------------------------------------------
-      SUBROUTINE nnnpls(A,MDA,M,N,CON,B,X,RNORM,W,ZZ,INDEX,MODE) 
+      SUBROUTINE nnnpls(A,MDA,M,N,CON,B,X,RNORM,W,ZZ,INDEX,MODE,NSETP) 
 C     ------------------------------------------------------------------
       integer I, II, IP, ITER, ITMAX, IZ, IZ1, IZ2, IZMAX, J, JJ, JZ, L
       integer M, MDA, MODE,N, NPP1, NSETP, RTNKEY
