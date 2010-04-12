@@ -6,8 +6,8 @@
   NNLS implementation of an algorithm
   for non-negative linear least squares 
   that solves 
-  \eqn{A x = b} with the constraint \eqn{x \ge 0} under least squares
-  criteria,  where
+  \eqn{\min{\parallel A x - b \parallel_2}} with the
+    constraint \eqn{x \ge 0},  where
   \eqn{x \in R^n, b \in R^m}  and \eqn{A} is an \eqn{m \times n} matrix. 
 }
 \usage{
@@ -49,7 +49,6 @@ Hall, Englewood Cliffs, NJ.
 Lawson CL, Hanson RJ (1995). Solving Least Squares Problems. Classics
 in Applied Mathematics. SIAM, Philadelphia.
 }
-\author{Katharine M. Mullen <kate@nat.vu.nl> }
 
 \source{
   This is an R interface to the Fortran77 code distributed
@@ -59,7 +58,7 @@ in Applied Mathematics. SIAM, Philadelphia.
   NSETP.
 }
 \seealso{\link{nnnpls}, the method \code{"L-BFGS-B"} for \link{optim},
-  \link[pkg]{quadprog}, \link[pkg]{bvls}
+  \link[quadprog]{solve.QP}, \link[bvls]{bvls}
 } 
 \examples{
 ## simulate a matrix A

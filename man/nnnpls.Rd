@@ -6,11 +6,9 @@
   An implementation of an algorithm for linear least squares problems
   with non-negative and non-positive
   constraints based on the Lawson-Hanson
-  NNLS algorithm.   Solves 
-  \eqn{A x = b} with the constraint \eqn{x_i \ge 0}
-  if \eqn{con_i \ge 0} and \eqn{x_i \le 0} otherwise
-  under least squares
-  criteria,  where
+  NNLS algorithm.   Solves \eqn{\min{\parallel A x - b \parallel_2}}
+  with the constraint \eqn{x_i \ge 0}
+  if \eqn{con_i \ge 0} and \eqn{x_i \le 0} otherwise,  where
   \eqn{x, con \in R^n, b \in R^m}, and \eqn{A} is an \eqn{m \times n} matrix.  
 }
 \usage{
@@ -55,7 +53,7 @@ Hall, Englewood Cliffs, NJ.
 Lawson CL, Hanson RJ (1995). Solving Least Squares Problems. Classics
 in Applied Mathematics. SIAM, Philadelphia.
 }
-\author{Katharine M. Mullen <kate@nat.vu.nl> }
+
 
 \source{
   This is an R interface to Fortran77 code distributed
@@ -67,7 +65,7 @@ in Applied Mathematics. SIAM, Philadelphia.
 }
 \seealso{
 \link{nnls}, the method \code{"L-BFGS-B"} for \link{optim},
-\link[pkg]{quadprog}, \link[pkg]{bvls}
+\link[quadprog]{solve.QP}, \link[bvls]{bvls}
 
 } 
 \examples{
