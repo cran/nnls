@@ -1,0 +1,10 @@
+3e268652f4df305e6a43b114007e2d39 *DESCRIPTION
+7928ddd104b66affd60aa4b41b97a59c *NAMESPACE
+d5a96eeca107e0fd9a921fcdbacbdedf *R/nnls.R
+0e1136ce55b874bcc3c56a0b2435f043 *R/zzz.R
+9bdb2d8803a5d7eea4a4744ca983e39a *inst/COPYRIGHTS
+7e59ea0c95fe3a0d1eb424f5de5df8fd *man/nnls-package.Rd
+8324b62a5ee954a869a553c1635e2cb7 *man/nnls.Rd
+a674f8fab264cc0d0dc526bd913be57e *man/nnnpls.Rd
+b2be94c3abd8d61c2c52b355739fb41c *src/lawson_hanson_nnls.f
+32649ce3a5d68d5e49f70193ebffe2fe *src/nnnpls.f

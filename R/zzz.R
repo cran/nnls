@@ -1,6 +1,6 @@
-".onLoad" <- function (lib, pack)
+".onLoad" <- function (lib, pkg)
 {
 
-	library.dynam(pack, pack, lib)
+	library.dynam(pkg, pkg, lib)
 
 }

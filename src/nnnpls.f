@@ -1,3 +1,7 @@
+c Note that calls to 'write' have been commented out  
+c since such call trigger warnings in R -KMM, March 2012 
+c Also, made DUMMY double precision DUMMY(*) 
+
 C     SUBROUTINE NNNPLS  (A,MDA,M,N,CON,B,X,RNORM,W,ZZ,INDEX,MODE)
 C   
 C  Algorithm NNNPLS: NONNEGATIVE LEAST SQUARES with trivial modifications 
@@ -61,8 +65,8 @@ c     double precision A(MDA,N), B(M), W(N), X(N), ZZ(M)
       integer INDEX(*)  
       integer C1, C2
       double precision CON(N)
-      double precision A(MDA,*), B(*), W(*), X(*), ZZ(*)   
-      double precision ALPHA, ASAVE, CC, DIFF, DUMMY, FACTOR, RNORM
+      double precision A(MDA,*), B(*), W(*), X(*), ZZ(*), DUMMY(1) 
+      double precision ALPHA, ASAVE, CC, DIFF, FACTOR, RNORM
       double precision SM, SS, T, TEMP, TWO, UNORM, UP, WMAX
       double precision ZERO, ZTEST
       parameter(FACTOR = 0.01d0)
@@ -206,7 +210,7 @@ C
       ITER=ITER+1   
       IF (ITER .gt. ITMAX) then
          MODE=3
-         write (*,'(/a)') ' NNLS quitting on iteration count.'
+c        write (*,'(/a)') ' NNLS quitting on iteration count.'
          GO TO 350 
       endif
 C   
