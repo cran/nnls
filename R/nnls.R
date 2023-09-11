@@ -1,9 +1,22 @@
 nnls <- function(A, b) {
-  MDA <- M <- nrow(A) 
-  N <- ncol(A)
-  RNORM <- MODE <- NSETP <- 0
-  W <- INDEX <- X <- rep(0, N)
-  ZZ <- rep(0, M)
+      
+    if(anyNA(A) || anyNA(b))
+        stop("NA in input.")
+    if(any(is.nan(A)) || any(is.nan(b)))
+        stop("NaN in input.")
+    if(is.null(A) || is.null(b))
+        stop("NULL in input.")
+    if(any(is.infinite(A)) || any(is.infinite(b)))
+        stop("Infinite value in input.")
+    if(!(length(b) == nrow(A)))
+        stop("Arguments `A' and `b' have incompatible dimensions.")
+    
+    MDA <- M <- nrow(A) 
+    N <- ncol(A)
+    RNORM <- MODE <- NSETP <- 0
+    W <- INDEX <- X <- rep(0, N)
+    ZZ <- rep(0, M)
+    
   sol <- .Fortran("nnls", A = as.numeric(A), MDA = as.integer(MDA), M =
                  as.integer(M), N = as.integer(N), B = as.numeric(b),
                  X = as.numeric(X), RNORM = as.numeric(RNORM), W =
@@ -28,6 +41,20 @@ nnls <- function(A, b) {
   nnls.out 
 }
 nnnpls <- function(A, b, con) {
+   
+    if(anyNA(A) || anyNA(b))
+        stop("NA in input.")
+    if(any(is.nan(A)) || any(is.nan(b)))
+        stop("NaN in input.")
+    if(is.null(A) || is.null(b))
+        stop("NULL in input.")
+    if(any(is.infinite(A)) || any(is.infinite(b)))
+        stop("Infinite value in input.")
+    if(!(length(b) == nrow(A)))
+        stop("Arguments `A' and `b' have incompatible dimensions.")
+    if(!(length(con) == ncol(A)))
+         stop("Argument `con' has wrong length.")
+    
   MDA <- M <- nrow(A) 
   N <- ncol(A)
   RNORM <- MODE <- NSETP <- 0

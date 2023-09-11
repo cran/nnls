@@ -109,26 +109,36 @@ C     ------------------------------------------------------------------
       IF (MODE.EQ.2) GO TO 60   
 C                            ****** CONSTRUCT THE TRANSFORMATION. ******
           DO 10 J=L1,M  
-   10     CL=MAX(abs(U(1,J)),CL)  
-      IF (CL) 130,130,20
+           CL=MAX(abs(U(1,J)),CL)
+ 10     END DO
+        IF (CL.LT.0) GO TO 130
+        IF(CL.EQ.0) GO TO 130
+        IF(CL.GT.0) GO TO 20     
    20 CLINV=ONE/CL  
       SM=(U(1,LPIVOT)*CLINV)**2   
           DO 30 J=L1,M  
-   30     SM=SM+(U(1,J)*CLINV)**2 
+             SM=SM+(U(1,J)*CLINV)**2
+ 30        END DO
       CL=CL*SQRT(SM)   
-      IF (U(1,LPIVOT)) 50,50,40     
+      IF (U(1,LPIVOT).LT.0) GO TO 50
+      IF (U(1,LPIVOT).EQ.0) GO TO 50
+      IF (U(1,LPIVOT).GT.0) GO TO 40
    40 CL=-CL
    50 UP=U(1,LPIVOT)-CL 
       U(1,LPIVOT)=CL    
       GO TO 70  
 C            ****** APPLY THE TRANSFORMATION  I+U*(U**T)/B  TO C. ******
 C   
-   60 IF (CL) 130,130,70
+ 60   IF (CL.LT.0) GO TO 130
+      IF (CL.EQ.0) GO TO 130
+      IF(CL.GT.0) GO TO 70   
    70 IF (NCV.LE.0) RETURN  
       B= UP*U(1,LPIVOT)
 C                       B  MUST BE NONPOSITIVE HERE.  IF B = 0., RETURN.
 C   
-      IF (B) 80,130,130 
+      IF (B.LT.0) GO TO 80
+      IF (B.EQ.0) GO TO 130
+      IF (B.GT.0) GO TO 130  
    80 B=ONE/B   
       I2=1-ICV+ICE*(LPIVOT-1)   
       INCR=ICE*(L1-LPIVOT)  
@@ -139,13 +149,17 @@ C
           SM=C(I2)*UP
               DO 90 I=L1,M  
               SM=SM+C(I3)*U(1,I)
-   90         I3=I3+ICE 
-          IF (SM) 100,120,100   
+              I3=I3+ICE
+ 90           END DO
+              IF (SM.LT.0) GO TO 100
+              IF (SM.EQ.0) GO TO 120
+              IF (SM.GT.0) GO TO 100          
   100     SM=SM*B   
           C(I2)=C(I2)+SM*UP
               DO 110 I=L1,M 
               C(I4)=C(I4)+SM*U(1,I)
-  110         I4=I4+ICE 
+              I4=I4+ICE
+ 110          END DO 
   120     CONTINUE  
   130 RETURN
       END   
@@ -224,8 +238,9 @@ C                    INITIALIZE THE ARRAYS INDEX() AND X().
 C   
           DO 20 I=1,N   
           X(I)=ZERO     
-   20     INDEX(I)=I    
-C   
+          INDEX(I)=I    
+ 20       END DO
+C     
       IZ2=N 
       IZ1=1 
       NSETP=0   
@@ -243,8 +258,9 @@ C
          J=INDEX(IZ)   
          SM=ZERO   
          DO 40 L=NPP1,M
-   40        SM=SM+A(L,J)*B(L)     
-         W(J)=SM   
+           SM=SM+A(L,J)*B(L)     
+ 40      END DO
+           W(J)=SM   
    50 continue
 C                                   FIND LARGEST POSITIVE W(J). 
    60 continue
@@ -273,7 +289,8 @@ C
       UNORM=ZERO
       IF (NSETP .ne. 0) then
           DO 90 L=1,NSETP   
-   90       UNORM=UNORM+A(L,J)**2     
+             UNORM=UNORM+A(L,J)**2
+ 90       END DO
       endif
       UNORM=sqrt(UNORM) 
       IF (DIFF(UNORM+ABS(A(NPP1,J))*FACTOR,UNORM) .gt. ZERO) then
@@ -282,7 +299,8 @@ C        COL J IS SUFFICIENTLY INDEPENDENT.  COPY B INTO ZZ, UPDATE ZZ
 C        AND SOLVE FOR ZTEST ( = PROPOSED NEW VALUE FOR X(J) ).    
 C   
          DO 120 L=1,M  
-  120        ZZ(L)=B(L)    
+            ZZ(L)=B(L)
+ 120     END DO
          CALL H12 (2,NPP1,NPP1+1,M,A(1,J),1,UP,ZZ,1,1,1)   
          ZTEST=ZZ(NPP1)/A(NPP1,J)  
 C   
@@ -306,7 +324,8 @@ C     COL J,  SET W(J)=0.
 C   
   140 continue
       DO 150 L=1,M  
-  150    B(L)=ZZ(L)    
+         B(L)=ZZ(L)
+ 150  END DO
 C   
       INDEX(IZ)=INDEX(IZ1)  
       INDEX(IZ1)=J  
@@ -323,7 +342,8 @@ C
 C   
       IF (NSETP .ne. M) then
          DO 180 L=NPP1,M   
-  180       A(L,J)=ZERO   
+            A(L,J)=ZERO
+ 180     END DO
       endif
 C   
       W(J)=ZERO 
@@ -425,7 +445,8 @@ C
 C         COPY B( ) INTO ZZ( ).  THEN SOLVE AGAIN AND LOOP BACK.
 C   
       DO 310 I=1,M  
-  310     ZZ(I)=B(I)    
+         ZZ(I)=B(I)
+ 310  END DO
       RTNKEY = 2
       GO TO 400 
   320 CONTINUE  
@@ -435,7 +456,8 @@ C
   330 continue
       DO 340 IP=1,NSETP 
           I=INDEX(IP)   
-  340     X(I)=ZZ(IP)   
+          X(I)=ZZ(IP)
+ 340   END DO
 C        ALL NEW COEFFS ARE POSITIVE.  LOOP BACK TO BEGINNING.  
       GO TO 30  
 C   
@@ -448,10 +470,12 @@ C
       SM=ZERO   
       IF (NPP1 .le. M) then
          DO 360 I=NPP1,M   
-  360       SM=SM+B(I)**2 
+            SM=SM+B(I)**2
+ 360     END DO
       else
          DO 380 J=1,N  
-  380       W(J)=ZERO     
+            W(J)=ZERO
+ 380     END DO
       endif
       RNORM=sqrt(SM)    
       RETURN

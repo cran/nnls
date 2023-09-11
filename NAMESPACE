@@ -1,3 +1,4 @@
+useDynLib(nnls)
 export(nnls,nnnpls)
 
 S3method("print", "nnls")
