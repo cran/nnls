@@ -359,5 +359,14 @@ C
          JJ=INDEX(IP)  
          ZZ(IP)=ZZ(IP)/A(IP,JJ)    
   430 continue
-      go to (200, 320), RTNKEY
-      END  
+      select case(RTNKEY)
+      case(1)
+         GO TO 200
+      case(2)
+         GO TO 320
+      case default
+ 440     continue 
+      end select
+      END
+
+      

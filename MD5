@@ -1,6 +1,6 @@
-ea42711412f384ed16fd7135dda48805 *DESCRIPTION
+6fba5d8ef6729f02a74e8e152ec8cbd3 *DESCRIPTION
 08ef982aa6275034492393c25897d6c2 *NAMESPACE
-b1d1f2c621676cd77f60eef0b4a42647 *NEWS
+8c0df30927e93f209ad51a124ac65016 *NEWS
 45c99ea3a959eccf5a775c384dc578a5 *R/nnls.R
 0e1136ce55b874bcc3c56a0b2435f043 *R/zzz.R
 9bdb2d8803a5d7eea4a4744ca983e39a *inst/COPYRIGHTS
@@ -8,5 +8,5 @@ b1d1f2c621676cd77f60eef0b4a42647 *NEWS
 8324b62a5ee954a869a553c1635e2cb7 *man/nnls.Rd
 a674f8fab264cc0d0dc526bd913be57e *man/nnnpls.Rd
 4c013393f25fe34ee3805af84d69dcb7 *src/init.c
-51950c3d50ebe6c33817deaf92611934 *src/lawson_hanson_nnls.f
-a06a24d8d87d61fffd813507b7200144 *src/nnnpls.f
+c8a45a1b58f7642adaf6a51f7b245437 *src/lawson_hanson_nnls.f
+5db606f452f70abf8a6fab52afa04d78 *src/nnnpls.f
